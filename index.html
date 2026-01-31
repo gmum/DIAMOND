@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <!-- TODO: Replace with your paper title and author names -->
+  <meta name="title" content="DIAMOND: Directed Inference for Artifact Mitigation in Flow Matching Models">
+  <!-- TODO: Write a compelling 150-160 character description of your research -->
+  <meta name="description" content="We propose DIAMOND an inference-time trajectory correction mechanism to mitigate artifacts in Rectified Flow and Diffusion Models.">
+  <!-- TODO: Add 5-10 relevant keywords for your research area -->
+  <meta name="keywords" content="generative models, rectified flow models, diffusion models, machine learning, computer vision, artifact removal">
+  <!-- TODO: List all authors -->
+  <meta name="author" content="Alicja Polowczyk, Agnieszka Polowczyk, Piotr Borcyki, Joanna Waczyńska, Jacek Tabor, Przemysław Spurek">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <!-- TODO: Replace with your institution or lab name -->
+  <meta property="og:site_name" content="Jagiellonian University">
+  <!-- TODO: Same as paper title above -->
+  <meta property="og:title" content="DIAMOND: Directed Inference for Artifact Mitigation in Flow Matching Models">
+  <!-- TODO: Same as description above -->
+  <meta property="og:description" content="We propose DIAMOND an inference-time trajectory correction mechanism to mitigate artifacts in Rectified Flow and Diffusion Models.">
+  <!-- TODO: Replace with your actual website URL -->
+  <meta property="og:url" content="https://gmum.github.io/DIAMOND/">
+  <!-- TODO: Create a 1200x630px preview image and update path -->
+  <meta property="og:image" content="https://gmum.github.io/DIAMOND/static/images/teaser_1200_630.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="DIAMOND: Directed Inference for Artifact Mitigation in Flow Matching Models">
+  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
+  <meta property="article:author" content="Alicja Polowczyk">
+  <meta property="article:author" content="Agnieszka Polowczyk">
+  <meta property="article:author" content="Piotr Borycki">
+  <meta property="article:author" content="Joanna Waczyńska">
+  <meta property="article:author" content="Jacek Tabor">
+  <meta property="article:author" content="Przemysław Spurek">
+  <meta property="article:section" content="Computer Vision">
+  <meta property="article:tag" content="Diffusion Models">
+  <meta property="article:tag" content="Rectified Flow Models">
+  <meta property="article:tag" content="Machine Learning">
+  <meta property="article:tag" content="Artifact Removal">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="DIAMOND: Directed Inference for Artifact Mitigation in Flow Matching Models">
+  <meta name="citation_author" content="Polowczyk, Alicja">
+  <meta name="citation_author" content="Polowczyk, Agnieszka">
+  <meta name="citation_author" content="Borycki, Piotr">
+  <meta name="citation_author" content="Waczyńska, Joanna">
+  <meta name="citation_author" content="Tabor, Jacek">
+  <meta name="citation_author" content="Spurek, Przemysław">
+  <meta name="citation_publication_date" content="2024">
+  <!--meta name="citation_conference_title" content="CONFERENCE_NAME">
+  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">-->
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <!-- TODO: Replace with your paper title and authors -->
+  <title>DIAMOND: Directed Inference for Artifact Mitigation in Flow Matching  Models</title>
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon_diamond.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon_diamond.ico">
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "DIAMOND: Directed Inference for Artifact Mitigation in Flow Matching Models",
+    "description": "We propose DIAMOND an inference-time trajectory correction mechanism to mitigate artifacts in Rectified Flow and Diffusion Models.",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Alicja Polowczyk",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Silesian University of Technology"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Agnieszka Polowczyk",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Silesian University of Technology"
+        }
+      }
+      {
+        "@type": "Person",
+        "name": "Piotr Borycki",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Jagiellonian University"
+        }
+      }
+      {
+        "@type": "Person",
+        "name": "Joanna Waczyńska",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Jagiellonian University"
+        }
+      }
+      {
+        "@type": "Person",
+        "name": "Jacek Tabor",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Jagiellonian University"
+        }
+      }
+      {
+        "@type": "Person",
+        "name": "Przemysław Spurek",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Jagiellonian University"
+        }
+      }
+    ],
+    <!--
+    "datePublished": "2024-01-01",
+    "publisher": {
+      "@type": "Organization",
+      "name": "CONFERENCE_OR_JOURNAL_NAME"
+    },
+    -->
+    "url": "https://gmum.github.io/DIAMOND/",
+    "image": "https://gmum.github.io/DIAMOND/static/images/teaser_1200_630.jpg",
+    "keywords": ["machine learning", "computer vision", "rectified flow models", "diffusion models", "generative models", "artifact removal"],
+    "abstract": "Despite impressive results from recent text-to-image models like FLUX, visual and anatomical artifacts remain a significant hurdle for practical and professional use. 
+    Existing methods for artifact reduction, typically work in a post-hoc manner, consequently failing to intervene effectively during the core image formation process. Notably, current techniques require problematic and invasive modifications to the model weights, or depend on a computationally expensive and time-consuming process of regional refinement. 
+    To address these limitations, we propose DIAMOND, a training-free method that applies trajectory correction to mitigate artifacts during inference. 
+    By reconstructing an estimate of the clean sample at every step of the generative trajectory, DIAMOND actively steers the generation process away from latent states that lead to artifacts. 
+    Furthermore, we extend the proposed method to standard Diffusion Models, demonstrating that DIAMOND provides a robust, zero-shot path to high-fidelity, artifact-free image synthesis without the need for additional training or weight modifications in modern generative architectures.",
+    "citation": "@article{wang2025diffdoctor,
+  title={DiffDoctor: Diagnosing Image Diffusion Models Before Treating},
+  author={Wang, Yiyang and Chen, Xi and Xu, Xiaogang and Ji, Sihui and Liu, Yu and Shen, Yujun and Zhao, Hengshuang},
+  journal={arXiv preprint arXiv:2501.12382},
+  year={2025}
+}
+
+@inproceedings{ab867a56d3224cad9b2963f04a47095e,
+title = "Applying Guidance in a Limited Interval Improves Sample and Distribution Quality in Diffusion Models",
+author = "Tuomas Kynk{\"a}{\"a}nniemi and Miika Aittala and Tero Karras and Samuli Laine and Timo Aila and Jaakko Lehtinen",
+year = "2025",
+isbn = "9798331314385",
+publisher = "Curran Associates Inc.",
+booktitle = "Advances in Neural Information Processing Systems 37 (NeurIPS 2024)",
+}
+
+@inproceedings{xing2025focus,
+  title={Focus-n-fix: Region-aware fine-tuning for text-to-image generation},
+  author={Xing, Xiaoying and Saha, Avinab and He, Junfeng and Hao, Susan and Vicol, Paul and Ryu, Moonkyung and Li, Gang and Singla, Sahil and Young, Sarah and Li, Yinxiao and others},
+  booktitle={Proceedings of the Computer Vision and Pattern Recognition Conference},
+  pages={18486--18496},
+  year={2025}
+}
+
+@article{menn2025synthesizing,
+  title={Synthesizing Artifact Dataset for Pixel-level Detection},
+  author={Menn, Dennis and Liang, Feng and Marculescu, Diana},
+  journal={arXiv preprint arXiv:2509.19589},
+  year={2025}
+}
+
+@inproceedings{cao2025temporal,
+  title={Temporal Score Analysis for Understanding and Correcting Diffusion Artifacts},
+  author={Cao, Yu and Zhao, Zengqun and Patras, Ioannis and Gong, Shaogang},
+  booktitle={Proceedings of the Computer Vision and Pattern Recognition Conference},
+  pages={7707--7716},
+  year={2025}
+}
+
+@inproceedings{zhang2023perceptual,
+  title={Perceptual artifacts localization for image synthesis tasks},
+  author={Zhang, Lingzhi and Xu, Zhengjie and Barnes, Connelly and Zhou, Yuqian and Liu, Qing and Zhang, He and Amirghodsi, Sohrab and Lin, Zhe and Shechtman, Eli and Shi, Jianbo},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={7579--7590},
+  year={2023}
+}
+
+@inproceedings{zheng2024self,
+  title={Self-adaptive reality-guided diffusion for artifact-free super-resolution},
+  author={Zheng, Qingping and Zheng, Ling and Guo, Yuanfan and Li, Ying and Xu, Songcen and Deng, Jiankang and Xu, Hang},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={25806--25816},
+  year={2024}
+}
+
+@inproceedings{qin2025handcraft,
+  title={Handcraft: Anatomically correct restoration of malformed hands in diffusion generated images},
+  author={Qin, Zhenyue and Zhang, Yiqun and Liu, Yang and Campbell, Dylan},
+  booktitle={2025 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+  pages={3925--3933},
+  year={2025},
+  organization={IEEE}
+}
+
+@inproceedings{kou2024bayesdiff,
+  title={BayesDiff: Estimating Pixel-wise Uncertainty in Diffusion via Bayesian Inference},
+  author={Kou, Siqi and Gan, Lei and Wang, Dequan and Li, Chongxuan and Deng, Zhijie},
+  booktitle={ICLR},
+  year={2024}
+}
+
+@article{lee2025refining,
+  title={Refining Visual Artifacts in Diffusion Models via Explainable AI-based Flaw Activation Maps},
+  author={Lee, Seoyeon and Yu, Gwangyeol and Kim, Chaewon and Park, Jonghyuk},
+  journal={arXiv preprint arXiv:2512.08774},
+  year={2025}
+}
+
+@inproceedings{wu2024self,
+  title={Self-correcting llm-controlled diffusion models},
+  author={Wu, Tsung-Han and Lian, Long and Gonzalez, Joseph E and Li, Boyi and Darrell, Trevor},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={6327--6336},
+  year={2024}
+}
+
+@inproceedings{lu2024handrefiner,
+  title={Handrefiner: Refining malformed hands in generated images by diffusion-based conditional inpainting},
+  author={Lu, Wenquan and Xu, Yufei and Zhang, Jing and Wang, Chaoyue and Tao, Dacheng},
+  booktitle={Proceedings of the 32nd ACM International Conference on Multimedia},
+  pages={7085--7093},
+  year={2024}
+}
+
+@article{xu2023imagereward,
+  title={Imagereward: Learning and evaluating human preferences for text-to-image generation},
+  author={Xu, Jiazheng and Liu, Xiao and Wu, Yuchen and Tong, Yuxuan and Li, Qinkai and Ding, Ming and Tang, Jie and Dong, Yuxiao},
+  journal={Advances in Neural Information Processing Systems},
+  volume={36},
+  pages={15903--15935},
+  year={2023}
+}
+
+@article{kirstain2023pick,
+  title={Pick-a-pic: An open dataset of user preferences for text-to-image generation},
+  author={Kirstain, Yuval and Polyak, Adam and Singer, Uriel and Matiana, Shahbuland and Penna, Joe and Levy, Omer},
+  journal={Advances in neural information processing systems},
+  volume={36},
+  pages={36652--36663},
+  year={2023}
+}
+
+@InProceedings{Poleski_2025_WACV,
+    author    = {Poleski, Mateusz and Tabor, Jacek and Spurek, Przemyslaw},
+    title     = {GeoGuide: Geometric Guidance of Diffusion Models},
+    booktitle = {Proceedings of the Winter Conference on Applications of Computer Vision (WACV)},
+    month     = {February},
+    year      = {2025},
+    pages     = {297-305}
+}
+
+@article{chang2023muse,
+  title={Muse: Text-to-image generation via masked generative transformers},
+  author={Chang, Huiwen and Zhang, Han and Barber, Jarred and Maschinot, AJ and Lezama, Jose and Jiang, Lu and Yang, Ming-Hsuan and Murphy, Kevin and Freeman, William T and Rubinstein, Michael and others},
+  journal={arXiv preprint arXiv:2301.00704},
+  year={2023}
+}
+
+@article{ding2022cogview2,
+  title={Cogview2: Faster and better text-to-image generation via hierarchical transformers},
+  author={Ding, Ming and Zheng, Wendi and Hong, Wenyi and Tang, Jie},
+  journal={Advances in Neural Information Processing Systems},
+  volume={35},
+  pages={16890--16902},
+  year={2022}
+}
+
+@inproceedings{lu2023tf,
+  title={Tf-icon: Diffusion-based training-free cross-domain image composition},
+  author={Lu, Shilin and Liu, Yanzhu and Kong, Adams Wai-Kin},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={2294--2305},
+  year={2023}
+}
+
+@article{malarz2025classifier,
+  title={Classifier-free Guidance with Adaptive Scaling},
+  author={Malarz, Dawid and Kasymov, Artur and Zieba, Maciej and Tabor, Jacek and Spurek, Przemys{\l}aw},
+  journal={arXiv preprint arXiv:2502.10574},
+  year={2025}
+}
+
+@article{dhariwal2021diffusion,
+  title={Diffusion models beat gans on image synthesis},
+  author={Dhariwal, Prafulla and Nichol, Alexander},
+  journal={Advances in neural information processing systems},
+  volume={34},
+  pages={8780--8794},
+  year={2021}
+}
+
+@misc{flux2024,
+    author={Black Forest Labs},
+    title={FLUX},
+    year={2024},
+    howpublished={\url{https://github.com/black-forest-labs/flux}},
+}
+
+@inproceedings{radford2021learning,
+  title={Learning transferable visual models from natural language supervision},
+  author={Radford, Alec and Kim, Jong Wook and Hallacy, Chris and Ramesh, Aditya and Goh, Gabriel and Agarwal, Sandhini and Sastry, Girish and Askell, Amanda and Mishkin, Pamela and Clark, Jack and others},
+  booktitle={International conference on machine learning},
+  pages={8748--8763},
+  year={2021},
+  organization={PmLR}
+}
+
+@INPROCEEDINGS{geoguide,
+  author={Poleski, Mateusz and Tabor, Jacek and Spurek, Przemysław},
+  booktitle={2025 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)}, 
+  title={GeoGuide: Geometric Guidance of Diffusion Models}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={297-305},
+  keywords={Manifolds;Training;Measurement;Visualization;Image synthesis;Noise reduction;Diffusion models;Probabilistic logic;Data models;Trajectory;geoguide;diffusion;guidance},
+  doi={10.1109/WACV61041.2025.00039}}
+
+@INPROCEEDINGS{perception_diffusion,
+  author={Choi, Jooyoung and Lee, Jungbeom and Shin, Chaehun and Kim, Sungwon and Kim, Hyunwoo and Yoon, Sungroh},
+  booktitle={2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}, 
+  title={Perception Prioritized Training of Diffusion Models}, 
+  year={2022},
+  volume={},
+  number={},
+  pages={11462-11471},
+  keywords={Training;Visualization;Computational modeling;Noise reduction;Data models;Image restoration;Pattern recognition;Image and video synthesis and generation},
+  doi={10.1109/CVPR52688.2022.01118}}
+
+@article{tweedie,
+ ISSN = {01621459},
+ URL = {http://www.jstor.org/stable/23239562},
+ author = {Bradley Efron},
+ journal = {Journal of the American Statistical Association},
+ number = {496},
+ pages = {1602--1614},
+ publisher = {[American Statistical Association, Taylor & Francis, Ltd.]},
+ title = {Tweedie's Formula and Selection Bias},
+ urldate = {2026-01-15},
+ volume = {106},
+ year = {2011}
+}
+
+@inproceedings{Karras2022edm,
+  author    = {Tero Karras and Miika Aittala and Timo Aila and Samuli Laine},
+  title     = {Elucidating the Design Space of Diffusion-Based Generative Models},
+  booktitle = {Proc. NeurIPS},
+  year      = {2022}
+}
+
+@inproceedings{ICLR2024_sdxl,
+ author = {Podell, Dustin and English, Zion and Lacey, Kyle and Blattmann, Andreas and Dockhorn, Tim and M\"{u}ller, Jonas and Penna, Joe and Rombach, Robin},
+ booktitle = {International Conference on Representation Learning},
+ editor = {B. Kim and Y. Yue and S. Chaudhuri and K. Fragkiadaki and M. Khan and Y. Sun},
+ pages = {1862--1874},
+ title = {SDXL: Improving Latent Diffusion Models for High-Resolution Image Synthesis},
+ volume = {2024},
+ year = {2024}
+}
+",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "RESEARCH_AREA_1"
+      },
+      {
+        "@type": "Thing", 
+        "name": "RESEARCH_AREA_2"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "INSTITUTION_OR_LAB_NAME",
+    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
+    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
+    "sameAs": [
+      "https://twitter.com/YOUR_TWITTER_HANDLE",
+      "https://github.com/YOUR_GITHUB_USERNAME"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+
+  <div class="top-bar" aria-hidden="true">
+    <div class="top-bar-inner">
+      <img src="static/images/logo.jpg" alt="GMUM logo" loading="lazy" decoding="async">
+    </div>
+  </div>
+
+  <nav class="mini-nav" aria-label="Quick navigation">
+    <div class="mini-nav-inner">
+      <a href="#summary">Home</a>
+      <a href="#results">Results</a>
+      <a href="#pipeline">Pipeline</a>
+      <a href="#BibTeX">BibTeX</a>
+    </div>
+  </nav>
+ 
+
+  <main id="main-content">
+  <section class="hero publication-hero" id="summary">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- TODO: Replace with your paper title -->
+            <h1 class="title is-1 publication-title"><span class="title-diamond">DIAMOND</span>: Directed Inference for Artifact Mitigation in Flow Matching Models</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- TODO: Replace with your paper authors and their personal links -->
+              <span class="author-block">
+                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Alicja Polowczyk</a><sup>1*</sup>,</span>
+                <span class="author-block">
+                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Agnieszka Polowczyk</a><sup>1*</sup>,</span>
+                  <span class="author-block">
+                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Piotr Borycki</a><sup>2</sup>,</span>
+                  <span class="author-block">
+                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Joanna Waczyńska</a><sup>2</sup>,</span>
+                  <span class="author-block">
+                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Jacek Tabor</a><sup>2</sup>,</span>
+                  <span class="author-block">
+                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Przemysław Spurek</a><sup>2,3</sup></span>
+                  </div>
+                  <div class="is-size-5 publication-authors">
+                    <!-- TODO: Replace with your institution and conference/journal info -->
+                    <span class="author-block">
+                      <sup>1</sup>Silesian University of Technology 
+                      <sup>2</sup>Jagiellonian University
+                      <sup>3</sup>IDEAS Research Institute
+                    </span>
+
+                    <!-- TODO: Remove this line if no equal contribution -->
+                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- TODO: Update with your arXiv paper ID -->
+                      <span class="link-block">
+                        <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+
+                  <!-- TODO: Replace with your GitHub repository URL -->
+                  <span class="link-block">
+                    <a href="https://github.com/gmum/DIAMOND" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser image -->
+<section class="hero teaser">
+  <div class="container is-fullhd">
+    <div class="hero-body">
+      <figure class="teaser-figure">
+        <img class="teaser-image" src="static/images/teaser.jpg" alt="DIAMOND teaser visualization" loading="eager" decoding="async">
+        <div class="teaser-lens" aria-hidden="true"></div>
+        <figcaption class="subtitle has-text-centered teaser-caption">
+          We propose <strong class="title-diamond">DIAMOND</strong>, an inference-time trajectory correction mechanism to mitigate artifacts in Rectified Flow and Diffusion Models. First, we generate an image <em>D(x<sub>1</sub>)</em> from the initial probability distribution sample, which then undergoes the generative process. The Base Trajectory (red) leads to an image containing artifacts, whereas our corrected <strong class="title-diamond">DIAMOND</strong> Trajectory (green) results in the artifact-free image. At timestep <em>t</em>, we estimate the final image <em>x&#770;<sub>0,t</sub></em> (gray dashed line) and use an Artifact Detector to apply a gradient-based trajectory correction (purple arrows), shifting it away from artifact region.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+<!-- End teaser image -->
+
+<!-- X0/XT Artifact Check -->
+<section class="section artifact-check">
+  <div class="container is-fullhd">
+    <div class="columns is-centered">
+      <div class="column is-12">
+        <h2 class="title is-3 artifact-title">Artifact Detector Activation Across Trajectory Steps</h2>
+        <p class="artifact-description">
+          Detection is performed only on the estimated <em>x&#770;</em><sub>0,t</sub>; it is not applied to <em>x</em><sub>t</sub>.
+        </p>
+        <div class="artifact-grid">
+          <div class="artifact-row artifact-x0 artifact-reveal">
+            <div class="artifact-label artifact-label-stack">
+              <span><em>x&#770;</em><sub>0,t</sub></span>
+              <input id="x0Overlay" class="artifact-slider-vertical" type="range" min="0" max="100" value="100" aria-label="Overlay reveal" orient="vertical">
+              <span class="artifact-control-hint">overlay</span>
+              <span class="artifact-helper">Drag down to reveal the overlay</span>
+            </div>
+            <div class="artifact-cells">
+              <div class="artifact-cell">
+                <span class="artifact-cell-label"><em>t</em><sub>0</sub></span>
+                <img class="artifact-img artifact-base" src="static/images/x0andxt/step_000_x0.jpg" alt="x0 step t0" loading="lazy" decoding="async">
+                <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_000_x0_overlay.jpg" alt="x0 overlay step t0" loading="lazy" decoding="async">
+              </div>
+              <div class="artifact-cell">
+                <span class="artifact-cell-label"><em>t</em><sub>2</sub></span>
+                <img class="artifact-img artifact-base" src="static/images/x0andxt/step_002_x0.jpg" alt="x0 step t2" loading="lazy" decoding="async">
+                <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_002_x0_overlay.jpg" alt="x0 overlay step t2" loading="lazy" decoding="async">
+              </div>
+              <div class="artifact-cell">
+                <span class="artifact-cell-label"><em>t</em><sub>4</sub></span>
+                <img class="artifact-img artifact-base" src="static/images/x0andxt/step_004_x0.jpg" alt="x0 step t4" loading="lazy" decoding="async">
+                <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_004_x0_overlay.jpg" alt="x0 overlay step t4" loading="lazy" decoding="async">
+              </div>
+              <div class="artifact-cell">
+                <span class="artifact-cell-label"><em>t</em><sub>6</sub></span>
+                <img class="artifact-img artifact-base" src="static/images/x0andxt/step_006_x0.jpg" alt="x0 step t6" loading="lazy" decoding="async">
+                <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_006_x0_overlay.jpg" alt="x0 overlay step t6" loading="lazy" decoding="async">
+              </div>
+              <div class="artifact-cell">
+                <span class="artifact-cell-label"><em>t</em><sub>8</sub></span>
+                <img class="artifact-img artifact-base" src="static/images/x0andxt/step_008_x0.jpg" alt="x0 step t8" loading="lazy" decoding="async">
+                <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_008_x0_overlay.jpg" alt="x0 overlay step t8" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </div>
+          <div class="artifact-row artifact-xt artifact-reveal">
+            <div class="artifact-label artifact-label-stack">
+              <span><em>x</em><sub>t</sub></span>
+              <input id="xtOverlay" class="artifact-slider-vertical" type="range" min="0" max="100" value="100" aria-label="Overlay reveal" orient="vertical">
+              <span class="artifact-control-hint">overlay</span>
+              <span class="artifact-helper">Drag down to reveal the overlay</span>
+            </div>
+            <div class="artifact-cells">
+              <div class="artifact-cell">
+                <span class="artifact-cell-label"><em>t</em><sub>0</sub></span>
+                <img class="artifact-img artifact-base" src="static/images/x0andxt/step_000_xt.jpg" alt="xt step t0" loading="lazy" decoding="async">
+                <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_000_xt_overlay.jpg" alt="xt overlay step t0" loading="lazy" decoding="async">
+              </div>
+              <div class="artifact-cell">
+                <span class="artifact-cell-label"><em>t</em><sub>2</sub></span>
+                <img class="artifact-img artifact-base" src="static/images/x0andxt/step_002_xt.jpg" alt="xt step t2" loading="lazy" decoding="async">
+                <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_002_xt_overlay.jpg" alt="xt overlay step t2" loading="lazy" decoding="async">
+              </div>
+              <div class="artifact-cell">
+                <span class="artifact-cell-label"><em>t</em><sub>4</sub></span>
+                <img class="artifact-img artifact-base" src="static/images/x0andxt/step_004_xt.jpg" alt="xt step t4" loading="lazy" decoding="async">
+                <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_004_xt_overlay.jpg" alt="xt overlay step t4" loading="lazy" decoding="async">
+              </div>
+              <div class="artifact-cell">
+                <span class="artifact-cell-label"><em>t</em><sub>6</sub></span>
+                <img class="artifact-img artifact-base" src="static/images/x0andxt/step_006_xt.jpg" alt="xt step t6" loading="lazy" decoding="async">
+                <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_006_xt_overlay.jpg" alt="xt overlay step t6" loading="lazy" decoding="async">
+              </div>
+              <div class="artifact-cell">
+                <span class="artifact-cell-label"><em>t</em><sub>8</sub></span>
+                <img class="artifact-img artifact-base" src="static/images/x0andxt/step_008_xt.jpg" alt="xt step t8" loading="lazy" decoding="async">
+                <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_008_xt_overlay.jpg" alt="xt overlay step t8" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End X0/XT Artifact Check -->
+
+<!-- Qualitative Results -->
+<section class="section results-section" id="results">
+  <div class="container is-fullhd">
+    <div class="columns is-centered">
+      <div class="column is-12">
+        <h2 class="title is-3 results-title">Qualitative Results</h2>
+        <div class="results-header">
+          <span class="results-header-label baseline"><span>Baseline</span></span>
+          <span class="results-header-label diamond"><span class="diamond-text">DIAMOND</span></span>
+        </div>
+        <div class="results-grid">
+          <div class="results-row">
+            <div class="results-row-label">FLUX.2 [dev]</div>
+            <div class="results-pair">
+              <div class="results-item">
+                <div class="results-media from-left">
+                  <button class="results-zoom-btn" type="button" aria-pressed="false">Show zoom</button>
+                  <img class="results-image" src="static/images/all/14.png" data-src="static/images/all/14.png" data-zoom="static/images/all/22.png" alt="Baseline result 14" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <div class="results-item">
+                <div class="results-media from-right">
+                  <button class="results-zoom-btn" type="button" aria-pressed="false">Show zoom</button>
+                  <img class="results-image" src="static/images/all/15.png" data-src="static/images/all/15.png" data-zoom="static/images/all/23.png" alt="DIAMOND result 15" loading="lazy" decoding="async">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="results-row">
+            <div class="results-row-label">FLUX1.[dev]</div>
+            <div class="results-pair">
+              <div class="results-item">
+                <div class="results-media from-left">
+                  <button class="results-zoom-btn" type="button" aria-pressed="false">Show zoom</button>
+                  <img class="results-image" src="static/images/all/16.png" data-src="static/images/all/16.png" data-zoom="static/images/all/24.png" alt="Baseline result 16" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <div class="results-item">
+                <div class="results-media from-right">
+                  <button class="results-zoom-btn" type="button" aria-pressed="false">Show zoom</button>
+                  <img class="results-image" src="static/images/all/17.png" data-src="static/images/all/17.png" data-zoom="static/images/all/25.png" alt="DIAMOND result 17" loading="lazy" decoding="async">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="results-row">
+            <div class="results-row-label">FLUX1. [schnell]</div>
+            <div class="results-pair">
+              <div class="results-item">
+                <div class="results-media from-left">
+                  <button class="results-zoom-btn" type="button" aria-pressed="false">Show zoom</button>
+                  <img class="results-image" src="static/images/all/18.png" data-src="static/images/all/18.png" data-zoom="static/images/all/26.png" alt="Baseline result 18" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <div class="results-item">
+                <div class="results-media from-right">
+                  <button class="results-zoom-btn" type="button" aria-pressed="false">Show zoom</button>
+                  <img class="results-image" src="static/images/all/19.png" data-src="static/images/all/19.png" data-zoom="static/images/all/27.png" alt="DIAMOND result 19" loading="lazy" decoding="async">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="results-row">
+            <div class="results-row-label">SDXL</div>
+            <div class="results-pair">
+              <div class="results-item">
+                <div class="results-media from-left">
+                  <button class="results-zoom-btn" type="button" aria-pressed="false">Show zoom</button>
+                  <img class="results-image" src="static/images/all/20.png" data-src="static/images/all/20.png" data-zoom="static/images/all/28.png" alt="Baseline result 20" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <div class="results-item">
+                <div class="results-media from-right">
+                  <button class="results-zoom-btn" type="button" aria-pressed="false">Show zoom</button>
+                  <img class="results-image" src="static/images/all/21.png" data-src="static/images/all/21.png" data-zoom="static/images/all/29.png" alt="DIAMOND result 21" loading="lazy" decoding="async">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Qualitative Results -->
+
+<!-- More Results Across Datasets -->
+<section class="section dataset-results">
+  <div class="container is-fullhd">
+    <div class="columns is-centered">
+      <div class="column is-12">
+        <h2 class="title is-3 dataset-title">Additional Results Across Three Datasets</h2>
+        <p class="dataset-subtitle">
+          Each example smoothly transitions between Baseline and <span class="title-diamond">DIAMOND</span>.
+        </p>
+        <div class="dataset-tabs" role="tablist" aria-label="Datasets">
+          <button class="dataset-tab is-active" type="button" role="tab" aria-selected="true" data-dataset="people">People</button>
+          <button class="dataset-tab" type="button" role="tab" aria-selected="false" data-dataset="words">Words</button>
+          <button class="dataset-tab" type="button" role="tab" aria-selected="false" data-dataset="animals">Animals</button>
+        </div>
+        <div class="dataset-grid" aria-live="polite">
+          <div class="dataset-card">
+            <div class="dataset-media">
+              <img class="dataset-image baseline" src="static/images/dataset/people/38.png" alt="People example 1 baseline" loading="lazy" decoding="async">
+              <img class="dataset-image diamond" src="static/images/dataset/people/39.png" alt="People example 1 diamond" loading="lazy" decoding="async" aria-hidden="true">
+              <span class="dataset-badge baseline">Baseline</span>
+              <span class="dataset-badge diamond">DIAMOND</span>
+            </div>
+          </div>
+          <div class="dataset-card">
+            <div class="dataset-media">
+              <img class="dataset-image baseline" src="static/images/dataset/people/40.png" alt="People example 2 baseline" loading="lazy" decoding="async">
+              <img class="dataset-image diamond" src="static/images/dataset/people/41.png" alt="People example 2 diamond" loading="lazy" decoding="async" aria-hidden="true">
+              <span class="dataset-badge baseline">Baseline</span>
+              <span class="dataset-badge diamond">DIAMOND</span>
+            </div>
+          </div>
+          <div class="dataset-card">
+            <div class="dataset-media">
+              <img class="dataset-image baseline" src="static/images/dataset/people/42.png" alt="People example 3 baseline" loading="lazy" decoding="async">
+              <img class="dataset-image diamond" src="static/images/dataset/people/43.png" alt="People example 3 diamond" loading="lazy" decoding="async" aria-hidden="true">
+              <span class="dataset-badge baseline">Baseline</span>
+              <span class="dataset-badge diamond">DIAMOND</span>
+            </div>
+          </div>
+          <div class="dataset-card">
+            <div class="dataset-media">
+              <img class="dataset-image baseline" src="static/images/dataset/people/44.png" alt="People example 4 baseline" loading="lazy" decoding="async">
+              <img class="dataset-image diamond" src="static/images/dataset/people/45.png" alt="People example 4 diamond" loading="lazy" decoding="async" aria-hidden="true">
+              <span class="dataset-badge baseline">Baseline</span>
+              <span class="dataset-badge diamond">DIAMOND</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End More Results Across Datasets -->
+
+<!-- Overview of DIAMOND -->
+<section class="section pipeline-section" id="pipeline">
+  <div class="container is-fullhd">
+    <div class="columns is-centered">
+      <div class="column is-12">
+        <h2 class="title is-3 pipeline-title">Overview of <span class="title-diamond">DIAMOND</span></h2>
+        <div class="pipeline-card">
+          <div class="pipeline-media">
+            <img class="pipeline-image" src="static/images/diamond.jpg" alt="DIAMOND pipeline overview" loading="lazy" decoding="async">
+          </div>
+          <div class="pipeline-text">
+            <span class="pipeline-eyebrow">Inference-Time Pipeline</span>
+            <p class="pipeline-summary">
+              Our technique employs an inference-time pipeline designed to mitigate artifacts without additional training.
+            </p>
+            <div class="pipeline-more" id="pipelineMore">
+              <p>
+                Artifact suppression is achieved by correcting the trajectory using gradients derived from a pixel-wise segmentation loss.
+                During inference, the latent representation is iteratively updated using controlled shifts along the trajectory, enabling progressive
+                correction of artifact-prone regions.
+              </p>
+            </div>
+            <button class="pipeline-toggle" type="button" aria-expanded="false" aria-controls="pipelineMore">Read more</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Overview of DIAMOND -->
+
+
+
+
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 abstract-title">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- TODO: Replace with your paper abstract -->
+          <p>
+            Despite impressive results from recent text-to-image models like FLUX, visual and anatomical artifacts remain a significant hurdle for practical and professional use. Existing methods for artifact reduction, typically work in a post-hoc manner, consequently failing to intervene effectively during the core image formation process. Notably, current techniques require problematic and invasive modifications to the model weights, or depend on a computationally expensive and time-consuming process of regional refinement. To address these limitations, we propose <strong class="title-diamond">DIAMOND</strong>, a training-free method that applies trajectory correction to mitigate artifacts during inference. By reconstructing an estimate of the clean sample at every step of the generative trajectory, <strong class="title-diamond">DIAMOND</strong> actively steers the generation process away from latent states that lead to artifacts. Furthermore, we extend the proposed method to standard Diffusion Models, demonstrating that <strong class="title-diamond">DIAMOND</strong> provides a robust, zero-shot path to high-fidelity, artifact-free image synthesis without the need for additional training or weight modifications in modern generative architectures.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!--BibTex citation -->
+  <section class="section bibtex-section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-card">
+        <div class="bibtex-header">
+          <h2 class="title">BibTeX</h2>
+          <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+            <i class="fas fa-copy"></i>
+            <span class="copy-text">Copy</span>
+          </button>
+        </div>
+      <pre id="bibtex-code"><code>@misc{polowczyk2025memoryselfregenerationuncoveringhidden,
+  title={DIAMOND: Directed Inference for Artifact Mitigation in Flow Matching Models},
+  author={Alicja Polowczyk and Agnieszka Polowczyk and Piotr Borycki and Joanna Waczyńska and Jacek Tabor and Przemysław Spurek},
+  year={2025},
+  eprint={2510.03263},
+  archivePrefix={arXiv},
+  primaryClass={cs.LG},
+  url={https://arxiv.org/abs/2510.03263}
+}</code></pre>
+      </div>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
