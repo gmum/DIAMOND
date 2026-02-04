@@ -1,0 +1,6 @@
+name: people_100
+prompts_file: ./prompts/humans_100_eval.txt
+results_csv: accepted_prompts.csv
+artifact_threshold: 0.5
+max_tries_per_prompt: 1000
+save_overlays: true

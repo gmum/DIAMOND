@@ -1,0 +1,28 @@
+defaults:
+  - config
+  - model: dev
+  - detector: default
+  - loss: power
+  - lambda_schedule: power
+  - lora: disabled
+  - _self_
+
+task:
+  name: generate_csv
+
+csv_path: dataset_dev/accepted_prompts.csv
+
+generation:
+  height: ${model.height}
+  width: ${model.width}
+  num_steps: ${model.num_steps}
+  guidance_scale: 3.5
+  max_sequence_length: 256
+
+guidance:
+  enabled: true
+  grad_norm_eps: 1e-6
+  normalize_grad: true
+
+output:
+  run_name: guided

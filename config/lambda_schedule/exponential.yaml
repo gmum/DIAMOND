@@ -1,0 +1,6 @@
+type: exponential
+start: 30.0
+end: 1.0
+power: 5.0
+warmup: 5
+cooldown: 12

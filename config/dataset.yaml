@@ -1,0 +1,19 @@
+defaults:
+  - config
+  - model: dev
+  - detector: default
+  - dataset: artifacts
+  - _self_
+
+task:
+  name: dataset
+
+generation:
+  height: ${model.height}
+  width: ${model.width}
+  num_steps: ${model.num_steps}
+  guidance_scale: 3.5
+  max_sequence_length: 256
+
+output:
+  run_name: ""

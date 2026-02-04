@@ -1,0 +1,5 @@
+enabled: false
+path: ""
+scale: 1.0
+r: 16
+target_modules: ["to_k", "to_q", "to_v", "to_out.0"]

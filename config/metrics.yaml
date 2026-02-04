@@ -1,0 +1,16 @@
+defaults:
+  - config
+  - detector: default
+  - _self_
+
+task:
+  name: metrics
+
+metrics:
+  generated_dir: ""
+  reference_dir: null
+  prompts_csv: null
+  artifact_threshold: 0.5
+  batch_size: 8
+  output_dir: metrics
+  output_filename: results.txt

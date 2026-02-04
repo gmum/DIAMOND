@@ -1,0 +1,36 @@
+defaults:
+  - config
+  - model: flux2_dev
+  - detector: flux2
+  - loss: power
+  - lambda_schedule: exponential
+  - lora: disabled
+  - _self_
+
+task:
+  name: single_image_flux2
+
+prompt: "A powerful majestic deer standing in a calm lake, water reaching its legs, close-up shot focused on the head and upper body. Massive antlers, strong muscular build, intense and noble expression. Warm sunset light, golden hour glow reflecting on the water surface, dramatic sky with orange and pink tones. Ultra realistic wildlife photography, cinematic composition, shallow depth of field, sharp focus on the deer, highly detailed fur and antlers, natural colors, 8k realism"
+seed: 1000
+
+generation:
+  height: ${model.height}
+  width: ${model.width}
+  num_steps: ${model.num_steps}
+  guidance_scale: 4.0
+  max_sequence_length: 256
+
+loss:
+  type: power
+  gamma: 3.0
+
+guidance:
+  enabled: true
+  grad_norm_eps: 1e-6
+  normalize_grad: true
+
+output:
+  run_name: single_flux2
+  save_xt: true
+  save_x0: true
+  save_overlays: true

@@ -1,0 +1,17 @@
+# Base config shared by all tasks
+
+device: cuda
+dtype: bfloat16
+seed: 4444
+
+paths:
+  output_root: outputs
+  dataset_root: datasets
+  single_root: outputs/single
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+  job:
+    chdir: false

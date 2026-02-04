@@ -1,0 +1,5 @@
+name: flux2_dev
+model_id: black-forest-labs/FLUX.2-dev
+height: 1024
+width: 1024
+num_steps: 30
