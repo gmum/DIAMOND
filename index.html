@@ -74,8 +74,8 @@
   <title>DIAMOND: Directed Inference for Artifact Mitigation in Flow Matching  Models</title>
   
   <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/x-icon" href="static/images/favicon_diamond.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon_diamond.ico">
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.png">
+  <link rel="apple-touch-icon" href="static/images/favicon.png">
   
   <!-- Critical CSS - Load synchronously -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -453,7 +453,7 @@ booktitle = "Advances in Neural Information Processing Systems 37 (NeurIPS 2024)
 
   <nav class="mini-nav" aria-label="Quick navigation">
     <div class="mini-nav-inner">
-      <a href="#summary">Home</a>
+      <a href="#home">Home</a>
       <a href="#results">Results</a>
       <a href="#pipeline">Pipeline</a>
       <a href="#BibTeX">BibTeX</a>
@@ -462,7 +462,7 @@ booktitle = "Advances in Neural Information Processing Systems 37 (NeurIPS 2024)
  
 
   <main id="main-content">
-  <section class="hero publication-hero" id="summary">
+  <section class="hero publication-hero" id="home">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
@@ -472,17 +472,17 @@ booktitle = "Advances in Neural Information Processing Systems 37 (NeurIPS 2024)
             <div class="is-size-5 publication-authors">
               <!-- TODO: Replace with your paper authors and their personal links -->
               <span class="author-block">
-                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Alicja Polowczyk</a><sup>1*</sup>,</span>
+                <a href="https://www.linkedin.com/in/alicja-polowczyk-064739266/" target="_blank">Alicja Polowczyk</a><sup>1*</sup>,</span>
                 <span class="author-block">
-                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Agnieszka Polowczyk</a><sup>1*</sup>,</span>
+                  <a href="https://www.linkedin.com/in/agnieszka-polowczyk-91381323a/" target="_blank">Agnieszka Polowczyk</a><sup>1*</sup>,</span>
                   <span class="author-block">
-                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Piotr Borycki</a><sup>2</sup>,</span>
+                    <a href="https://www.linkedin.com/in/piotr-borycki-560052251" target="_blank">Piotr Borycki</a><sup>2</sup>,</span>
                   <span class="author-block">
-                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Joanna Waczyńska</a><sup>2</sup>,</span>
+                    <a href="https://www.linkedin.com/in/joannawaczynska" target="_blank">Joanna Waczyńska</a><sup>2</sup>,</span>
                   <span class="author-block">
-                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Jacek Tabor</a><sup>2</sup>,</span>
+                    <a href="https://scholar.google.pl/citations?user=zSKYziUAAAAJ&hl=pl" target="_blank">Jacek Tabor</a><sup>2</sup>,</span>
                   <span class="author-block">
-                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Przemysław Spurek</a><sup>2,3</sup></span>
+                    <a href="https://scholar.google.com/citations?hl=en&user=0kp0MbgAAAAJ" target="_blank">Przemysław Spurek</a><sup>2,3</sup></span>
                   </div>
                   <div class="is-size-5 publication-authors">
                     <!-- TODO: Replace with your institution and conference/journal info -->
@@ -534,8 +534,11 @@ booktitle = "Advances in Neural Information Processing Systems 37 (NeurIPS 2024)
   <div class="container is-fullhd">
     <div class="hero-body">
       <figure class="teaser-figure">
-        <img class="teaser-image" src="static/images/teaser.jpg" alt="DIAMOND teaser visualization" loading="eager" decoding="async">
-        <div class="teaser-lens" aria-hidden="true"></div>
+        <div class="teaser-media">
+          <img class="teaser-image" src="static/images/teaser.jpg" alt="DIAMOND teaser visualization" loading="eager" decoding="async">
+          <div class="teaser-lens" aria-hidden="true"></div>
+        </div>
+        <p class="teaser-hint" role="note">Hover to reveal zoom.</p>
         <figcaption class="subtitle has-text-centered teaser-caption">
           We propose <strong class="title-diamond">DIAMOND</strong>, an inference-time trajectory correction mechanism to mitigate artifacts in Rectified Flow and Diffusion Models. First, we generate an image <em>D(x<sub>1</sub>)</em> from the initial probability distribution sample, which then undergoes the generative process. The Base Trajectory (red) leads to an image containing artifacts, whereas our corrected <strong class="title-diamond">DIAMOND</strong> Trajectory (green) results in the artifact-free image. At timestep <em>t</em>, we estimate the final image <em>x&#770;<sub>0,t</sub></em> (gray dashed line) and use an Artifact Detector to apply a gradient-based trajectory correction (purple arrows), shifting it away from artifact region.
         </figcaption>
@@ -564,12 +567,12 @@ booktitle = "Advances in Neural Information Processing Systems 37 (NeurIPS 2024)
             </div>
             <div class="artifact-cells">
               <div class="artifact-cell">
-                <span class="artifact-cell-label"><em>t</em><sub>0</sub></span>
+                <span class="artifact-cell-label"><em>t</em><sub>8</sub></span>
                 <img class="artifact-img artifact-base" src="static/images/x0andxt/step_000_x0.jpg" alt="x0 step t0" loading="lazy" decoding="async">
                 <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_000_x0_overlay.jpg" alt="x0 overlay step t0" loading="lazy" decoding="async">
               </div>
               <div class="artifact-cell">
-                <span class="artifact-cell-label"><em>t</em><sub>2</sub></span>
+                <span class="artifact-cell-label"><em>t</em><sub>6</sub></span>
                 <img class="artifact-img artifact-base" src="static/images/x0andxt/step_002_x0.jpg" alt="x0 step t2" loading="lazy" decoding="async">
                 <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_002_x0_overlay.jpg" alt="x0 overlay step t2" loading="lazy" decoding="async">
               </div>
@@ -579,12 +582,12 @@ booktitle = "Advances in Neural Information Processing Systems 37 (NeurIPS 2024)
                 <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_004_x0_overlay.jpg" alt="x0 overlay step t4" loading="lazy" decoding="async">
               </div>
               <div class="artifact-cell">
-                <span class="artifact-cell-label"><em>t</em><sub>6</sub></span>
+                <span class="artifact-cell-label"><em>t</em><sub>2</sub></span>
                 <img class="artifact-img artifact-base" src="static/images/x0andxt/step_006_x0.jpg" alt="x0 step t6" loading="lazy" decoding="async">
                 <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_006_x0_overlay.jpg" alt="x0 overlay step t6" loading="lazy" decoding="async">
               </div>
               <div class="artifact-cell">
-                <span class="artifact-cell-label"><em>t</em><sub>8</sub></span>
+                <span class="artifact-cell-label"><em>t</em><sub>0</sub></span>
                 <img class="artifact-img artifact-base" src="static/images/x0andxt/step_008_x0.jpg" alt="x0 step t8" loading="lazy" decoding="async">
                 <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_008_x0_overlay.jpg" alt="x0 overlay step t8" loading="lazy" decoding="async">
               </div>
@@ -599,12 +602,12 @@ booktitle = "Advances in Neural Information Processing Systems 37 (NeurIPS 2024)
             </div>
             <div class="artifact-cells">
               <div class="artifact-cell">
-                <span class="artifact-cell-label"><em>t</em><sub>0</sub></span>
+                <span class="artifact-cell-label"><em>t</em><sub>8</sub></span>
                 <img class="artifact-img artifact-base" src="static/images/x0andxt/step_000_xt.jpg" alt="xt step t0" loading="lazy" decoding="async">
                 <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_000_xt_overlay.jpg" alt="xt overlay step t0" loading="lazy" decoding="async">
               </div>
               <div class="artifact-cell">
-                <span class="artifact-cell-label"><em>t</em><sub>2</sub></span>
+                <span class="artifact-cell-label"><em>t</em><sub>6</sub></span>
                 <img class="artifact-img artifact-base" src="static/images/x0andxt/step_002_xt.jpg" alt="xt step t2" loading="lazy" decoding="async">
                 <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_002_xt_overlay.jpg" alt="xt overlay step t2" loading="lazy" decoding="async">
               </div>
@@ -614,12 +617,12 @@ booktitle = "Advances in Neural Information Processing Systems 37 (NeurIPS 2024)
                 <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_004_xt_overlay.jpg" alt="xt overlay step t4" loading="lazy" decoding="async">
               </div>
               <div class="artifact-cell">
-                <span class="artifact-cell-label"><em>t</em><sub>6</sub></span>
+                <span class="artifact-cell-label"><em>t</em><sub>2</sub></span>
                 <img class="artifact-img artifact-base" src="static/images/x0andxt/step_006_xt.jpg" alt="xt step t6" loading="lazy" decoding="async">
                 <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_006_xt_overlay.jpg" alt="xt overlay step t6" loading="lazy" decoding="async">
               </div>
               <div class="artifact-cell">
-                <span class="artifact-cell-label"><em>t</em><sub>8</sub></span>
+                <span class="artifact-cell-label"><em>t</em><sub>0</sub></span>
                 <img class="artifact-img artifact-base" src="static/images/x0andxt/step_008_xt.jpg" alt="xt step t8" loading="lazy" decoding="async">
                 <img class="artifact-img artifact-overlay" src="static/images/x0andxt/step_008_xt_overlay.jpg" alt="xt overlay step t8" loading="lazy" decoding="async">
               </div>
@@ -661,7 +664,7 @@ booktitle = "Advances in Neural Information Processing Systems 37 (NeurIPS 2024)
             </div>
           </div>
           <div class="results-row">
-            <div class="results-row-label">FLUX1.[dev]</div>
+            <div class="results-row-label">FLUX.1 [dev]</div>
             <div class="results-pair">
               <div class="results-item">
                 <div class="results-media from-left">
@@ -678,7 +681,7 @@ booktitle = "Advances in Neural Information Processing Systems 37 (NeurIPS 2024)
             </div>
           </div>
           <div class="results-row">
-            <div class="results-row-label">FLUX1. [schnell]</div>
+            <div class="results-row-label">FLUX.1 [schnell]</div>
             <div class="results-pair">
               <div class="results-item">
                 <div class="results-media from-left">
@@ -842,7 +845,7 @@ booktitle = "Advances in Neural Information Processing Systems 37 (NeurIPS 2024)
   year={2026},
   eprint={2602.00883},
   archivePrefix={arXiv},
-  primaryClass={cs.LG},
+  primaryClass={cs.CV},
   url={https://arxiv.org/abs/2602.00883}
 }</code></pre>
       </div>
