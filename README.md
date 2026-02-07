@@ -128,4 +128,21 @@ python src/generate_single_image_flux2.py \
 ```
 > [!IMPORTANT]
 > Activate the correct Conda environment before running (see Environment Setup).
-> Outputs are saved to the `outputs/ directory`.
+> Outputs are saved to the `outputs/` directory.
+
+### LoRA-based SOTA Methods
+See the **📦 SOTA Method Weights** table for model support. To use a LoRA-based SOTA method, enable LoRA and set the appropriate checkpoint in `lora.path`.  
+### Example (HandsXL)
+
+```bash
+python src/generate_single_image.py \
+  model=dev \
+  'prompt="A South Asian man, 35 years old, with a visual impairment, reading braille books in a library."' \
+  seed=100283 \
+  lora=enabled \
+  lora.path="checkpoints/lora/people_handv1.safetensors" \
+  guidance.enabled=false \
+  output.run_name=lora_example
+```
+> [!IMPORTANT]
+> When using LoRA-based SOTA methods, always set `guidance.enabled=false`.
