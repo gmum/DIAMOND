@@ -131,7 +131,8 @@ python src/generate_single_image_flux2.py \
 > Outputs are saved to the `outputs/` directory.
 
 ### LoRA-based SOTA Methods
-See the **📦 SOTA Method Weights** table for model support. To use a LoRA-based SOTA method, enable LoRA and set the appropriate checkpoint in `lora.path`.  
+See the **📦 SOTA Method Weights** table for model support. Enable LoRA and set the appropriate checkpoint in `lora.path`.
+
 ### Example (HandsXL)
 
 ```bash
@@ -146,3 +147,25 @@ python src/generate_single_image.py \
 ```
 > [!IMPORTANT]
 > When using LoRA-based SOTA methods, always set `guidance.enabled=false`.
+
+
+## 📊 Evaluation / Metrics
+This script computes quantitative evaluation metrics for generated images.  
+Results are saved to `outputs/metrics/results.txt` by default and can be customized if needed.
+
+The following metrics are computed: **CLIP-T** ↑, **MeanArtifactFreq (%)** ↓, **ArtifactPixelRatio (%)** ↓, **MAE** ↓, **MAE(A)** ↓, **MAE(NA)** ↓.
+
+#### Run metric computation:
+
+```bash
+python src/generate_metrics.py \
+  metrics.generated_dir=/path/to/generated/images \
+  metrics.reference_dir=/path/to/reference/images \
+  metrics.prompts_csv=/path/to/prompts.csv 
+```
+For computing **ImageReward**, please refer to the official repository: https://github.com/zai-org/ImageReward
+
+> [!NOTE]  
+> Prompt CSV files used for evaluation are provided in the `datasets/` directory.
+
+
