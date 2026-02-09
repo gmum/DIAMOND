@@ -153,7 +153,7 @@ python src/generate_single_image.py \
 This script computes quantitative evaluation metrics for generated images.  
 Results are saved to `outputs/metrics/results.txt` by default and can be customized if needed.
 
-The following metrics are computed: **CLIP-T** ↑, **MeanArtifactFreq (%)** ↓, **ArtifactPixelRatio (%)** ↓, **MAE** ↓, **MAE(A)** ↓, **MAE(NA)** ↓.
+The following metrics are computed: **CLIP-T**, **MeanArtifactFreq (%)**, **ArtifactPixelRatio (%)**, **MAE**, **MAE(A)**, **MAE(NA)**.
 
 #### Run metric computation:
 
