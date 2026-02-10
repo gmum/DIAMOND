@@ -41,7 +41,6 @@ We provide two separate environment configurations depending on the model varian
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.6.0-red)
 ![TorchVision](https://img.shields.io/badge/torchvision-0.21.0-orange)
-![CUDA](https://img.shields.io/badge/CUDA-12.6-green)
 ![Diffusers](https://img.shields.io/badge/diffusers-0.33.1-yellow)
 
 Create and activate the Conda environment:
