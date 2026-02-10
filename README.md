@@ -41,18 +41,21 @@ We provide two separate environment configurations depending on the model varian
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.6.0-red)
 ![TorchVision](https://img.shields.io/badge/torchvision-0.21.0-orange)
-![CUDA](https://img.shields.io/badge/CUDA-12.6%2B-green)
+![CUDA](https://img.shields.io/badge/CUDA-12.6-green)
 ![Diffusers](https://img.shields.io/badge/diffusers-0.33.1-yellow)
+
+Create and activate the Conda environment:
 
 ```bash
 conda create -n diamond python=3.11 -y
 conda activate diamond
-
-pip install torch==2.6.0 torchvision==0.21.0 \
-  --index-url https://download.pytorch.org/whl/cu126
-
+```
+Install PyTorch and remaining dependencies:
+```bash
+pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cu126
 pip install -r requirements.txt
 ```
+
 ### 🔹 Option B — FLUX-2-dev
 Requires a newer version of diffusers installed directly from GitHub.
 
@@ -148,6 +151,34 @@ python src/generate_single_image.py \
 > [!IMPORTANT]
 > When using LoRA-based SOTA methods, always set `guidance.enabled=false`.
 
+## 🚀 Generate Multiple Images
+The generation setup is identical to single-image generation. **DIAMOND** can be enabled or disabled using `guidance.enabled=true/false`.  
+**LoRA-based SOTA** methods can be used by setting `lora=enabled` and specifying `lora.path`.
+ 
+For **FLUX.1 [dev]**, **FLUX.1 [schnell]**, use:
+```bash
+python src/generate_images_csv.py \
+  model=schnell \
+  csv_path=/path/to/prompts.csv \
+  loss=power \
+  lambda_schedule=power \
+  lambda_schedule.start=25 \
+  lambda_schedule.end=1 \
+  lambda_schedule.power=2 \
+  output.run_name=example_run
+```
+For **FLUX.2 [dev]**, use:
+```bash
+python src/generate_csv_flux2.py \
+  model=flux2dev \
+  csv_path=/path/to/prompts.csv \
+  loss=power \
+  lambda_schedule=power \
+  lambda_schedule.start=25 \
+  lambda_schedule.end=1 \
+  lambda_schedule.power=2 \
+  output.run_name=example_run
+```
 
 ## 📊 Evaluation / Metrics
 This script computes quantitative evaluation metrics for generated images.  
@@ -169,3 +200,25 @@ For computing **ImageReward**, please refer to the official repository: https://
 > Prompt CSV files used for evaluation are provided in the `datasets/` directory.
 
 
+
+## 🗂 Generate Custom Evaluation Dataset
+Generate a dataset by searching for valid seeds and saving prompts + seeds into a CSV file.  
+Prompts are provided as `.txt` files (one per line). Example files are in `prompts/`.
+The script also saves generated images and corresponding artifact masks.
+The `seed` parameter specifies the starting seed from which the search begins
+
+```bash
+python src/generate_dataset.py \
+  model=dev \
+  seed=100000 \
+  dataset.prompts_file=prompts/animals.txt \
+  dataset.name=my_dataset \
+  output.run_name=dataset_gen
+```
+
+> [!NOTE]  
+> Dataset generation is supported for **FLUX.1 [dev]**, **FLUX.1 [schnell]**, **FLUX.2 [dev]**, and **SDXL**.  
+> To switch models, only the script name and the `model` value need to be changed:
+> - `generate_dataset.py` → dev/schnell 
+> - `generate_dataset_flux2.py` → flux2dev
+> - `generate_dataset_sdxl.py` → sdxl
