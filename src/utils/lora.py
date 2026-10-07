@@ -10,9 +10,17 @@ def apply_lora(pipeline, lora_cfg) -> None:
 
     path = str(lora_cfg.path)
     ext = os.path.splitext(path)[1].lower()
+    scale = float(lora_cfg.scale)
 
     if ext == ".safetensors":
-        pipeline.load_lora_weights(path)
+        pipeline.load_lora_weights(
+            os.path.dirname(os.path.abspath(path)),
+            weight_name=os.path.basename(path),
+            adapter_name="default",
+            local_files_only=True,
+        )
+        if scale != 1.0:
+            pipeline.set_adapters("default", adapter_weights=scale)
         return
 
     if ext != ".bin":
@@ -36,3 +44,7 @@ def apply_lora(pipeline, lora_cfg) -> None:
     )
 
     pipeline.transformer.set_adapter("default")
+
+    if scale != 1.0:
+        if hasattr(pipeline.transformer, "scale_lora_layers"):
+            pipeline.transformer.scale_lora_layers(scale)

@@ -154,6 +154,7 @@ python src/generate_single_image.py \
   seed=100283 \
   lora=enabled \
   lora.path="checkpoints/lora/people_handv1.safetensors" \
+  lora.scale=0.1 \
   guidance.enabled=false \
   output.run_name=lora_example
 ```
