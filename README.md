@@ -58,18 +58,18 @@ pip install -r requirements.txt
 ### 🔹 Option B — FLUX-2-dev
 Requires a newer version of diffusers installed directly from GitHub.
 
-![Python](https://img.shields.io/badge/Python-3.10-blue)
+![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.5.1-red)
 ![TorchVision](https://img.shields.io/badge/torchvision-0.20.1-orange)
 ![TorchAudio](https://img.shields.io/badge/torchaudio-2.5.1-orange)
 ![Diffusers](https://img.shields.io/badge/diffusers-github-yellow)
 
 ```bash
-conda create -n diamond-flux2 python=3.10 -y
+conda create -n diamond-flux2 python=3.11 -y
 conda activate diamond-flux2
 
 pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 \
-  --index-url https://download.pytorch.org/whl/cu118
+  --index-url https://download.pytorch.org/whl/cu124
 
 pip uninstall diffusers -y
 pip install git+https://github.com/huggingface/diffusers.git -U
