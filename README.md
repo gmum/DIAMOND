@@ -97,7 +97,7 @@ We provide the model weights used in our evaluation of state-of-the-art artifact
 | FLUX.1 [schnell] | [Download](https://github.com/gmum/DIAMOND/releases/tag/weights-v1.0) | [Download](https://github.com/gmum/DIAMOND/releases/tag/weights-v1.0) | — |
 | SDXL | — | — | [Download](https://github.com/gmum/DIAMOND/releases/download/weights-v1.0/people_handv55.safetensors) |
 
-DiffDoctor and HPSv2 checkpoints are dataset-specific. Select the appropriate `animals`, `people`, or `words` checkpoint from the [DIAMOND Model Weights v1.0](https://github.com/gmum/DIAMOND/releases/tag/weights-v1.0) release.
+Select the appropriate `animals`, `people`, or `words` checkpoint from the [DIAMOND Model Weights v1.0](https://github.com/gmum/DIAMOND/releases/tag/weights-v1.0) release.
 
 HandsXL weights originate from the [official HandsXL repository](https://huggingface.co/xyy1551308532/Hands_XL).
 
