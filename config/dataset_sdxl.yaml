@@ -1,0 +1,22 @@
+defaults:
+  - config
+  - model: sdxl_base
+  - detector: default
+  - dataset: artifacts
+  - _self_
+
+task:
+  name: dataset_sdxl
+
+dtype: float16
+
+negative_prompt: ""
+
+generation:
+  height: ${model.height}
+  width: ${model.width}
+  num_steps: ${model.num_steps}
+  guidance_scale: 7.5
+
+output:
+  run_name: ""

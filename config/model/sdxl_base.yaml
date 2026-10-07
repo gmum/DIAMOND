@@ -1,0 +1,5 @@
+name: sdxl_base
+model_id: stabilityai/stable-diffusion-xl-base-1.0
+height: 1024
+width: 1024
+num_steps: 30

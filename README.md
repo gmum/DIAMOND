@@ -29,7 +29,7 @@ The method requires **no additional training, no finetuning, and no weight modif
 
 - **Feb. 2026**: Initial codebase released with support for **FLUX models** (FLUX.1-dev, FLUX-schnell, FLUX-2-dev).
 - **Feb. 2026**: Paper is available on arXiv.
-- **Coming Soon**: **SDXL code** will be added to the repository.
+- **Oct. 2026**: Added support for **SDXL**.
 
 
 ## ⚙️ Environment Setup
@@ -102,8 +102,6 @@ HandsXL weights originate from the [official HandsXL repository](https://hugging
 
 Evaluation datasets are not distributed with the repository. Generate them locally using the provided prompt files and the instructions in **Generate Custom Evaluation Dataset** below.
 
-# DIAMOND
-
 ## 🚀 Generate a Single Image
 
 Move to the repository root:
@@ -133,10 +131,20 @@ python src/generate_single_image.py \
 For **FLUX.2 [dev]**, use the separate script:
 ```bash
 python src/generate_single_image_flux2.py \
-  model=flux2dev \
+  model=flux2_dev \
   'prompt="Luxury crystal blue diamond, premium brand mark, vector style, simple and iconic, 4k resolution"' \
   seed=100285 \
   output.run_name=example_run
+```
+
+For **SDXL**, use:
+```bash
+python src/generate_single_image_sdxl.py \
+  model=sdxl_base \
+  'prompt="A sample prompt."' \
+  seed=100285 \
+  guidance.enabled=false \
+  output.run_name=example_sdxl
 ```
 > [!IMPORTANT]
 > Activate the correct Conda environment before running (see Environment Setup).
@@ -157,6 +165,20 @@ python src/generate_single_image.py \
   lora.scale=0.1 \
   guidance.enabled=false \
   output.run_name=lora_example
+```
+
+### Example (HandsXL with SDXL)
+
+```bash
+python src/generate_single_image_sdxl.py \
+  model=sdxl_base \
+  'prompt="A sample prompt."' \
+  seed=100283 \
+  lora=enabled \
+  lora.path="checkpoints/lora/people_handv55.safetensors" \
+  lora.scale=0.1 \
+  guidance.enabled=false \
+  output.run_name=handsxl_sdxl
 ```
 > [!IMPORTANT]
 > When using LoRA-based SOTA methods, always set `guidance.enabled=false`.
@@ -179,8 +201,8 @@ python src/generate_images_csv.py \
 ```
 For **FLUX.2 [dev]**, use:
 ```bash
-python src/generate_csv_flux2.py \
-  model=flux2dev \
+python src/generate_images_csv_flux2.py \
+  model=flux2_dev \
   csv_path=/path/to/prompts.csv \
   loss=power \
   lambda_schedule=power \
@@ -188,6 +210,14 @@ python src/generate_csv_flux2.py \
   lambda_schedule.end=1 \
   lambda_schedule.power=2 \
   output.run_name=example_run
+```
+
+For **SDXL**, use:
+```bash
+python src/generate_images_csv_sdxl.py \
+  model=sdxl_base \
+  csv_path=/path/to/prompts.csv \
+  output.run_name=example_sdxl
 ```
 
 ## 📊 Evaluation / Metrics
@@ -221,7 +251,7 @@ The `seed` parameter specifies the starting seed from which the search begins
 python src/generate_dataset.py \
   model=dev \
   seed=100000 \
-  dataset.prompts_file=prompts/animals.txt \
+  dataset.prompts_file=prompts/animals_100_eval.txt \
   dataset.name=my_dataset \
   output.run_name=dataset_gen
 ```
@@ -230,8 +260,8 @@ python src/generate_dataset.py \
 > Dataset generation is supported for **FLUX.1 [dev]**, **FLUX.1 [schnell]**, **FLUX.2 [dev]**, and **SDXL**.  
 > To switch models, only the script name and the `model` value need to be changed:
 > - `generate_dataset.py` → dev/schnell 
-> - `generate_dataset_flux2.py` → flux2dev
-> - `generate_dataset_sdxl.py` → sdxl
+> - `generate_dataset_flux2.py` → flux2_dev
+> - `generate_dataset_sdxl.py` → sdxl_base
 
 ## Citation
 

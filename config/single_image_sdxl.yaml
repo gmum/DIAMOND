@@ -1,0 +1,34 @@
+defaults:
+  - config
+  - model: sdxl_base
+  - detector: default
+  - loss: power
+  - lambda_schedule: power
+  - lora: disabled
+  - _self_
+
+task:
+  name: single_image_sdxl
+
+dtype: float16
+
+prompt: "A sample prompt."
+negative_prompt: ""
+seed: 4445
+
+generation:
+  height: ${model.height}
+  width: ${model.width}
+  num_steps: ${model.num_steps}
+  guidance_scale: 7.5
+
+guidance:
+  enabled: true
+  grad_norm_eps: 1e-6
+  normalize_grad: true
+
+output:
+  run_name: single_sdxl
+  save_xt: true
+  save_x0: true
+  save_overlays: true
