@@ -77,6 +77,14 @@ pip install git+https://github.com/huggingface/diffusers.git -U
 pip install -r requirements2.txt
 
 ```
+## 🔍 Artifact Detector Checkpoint
+
+Download `ad_pytorch_model.bin` from the [DiffDoctor](https://github.com/ali-vilab/DiffDoctor) repository and place it at:
+
+```text
+checkpoints/ad_pytorch_model.bin
+```
+
 ## 📦 SOTA Method Weights
 
 We release **our trained model weights** for several state-of-the-art artifact mitigation methods.
