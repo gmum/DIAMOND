@@ -96,10 +96,11 @@ We provide the model weights used in our evaluation of state-of-the-art artifact
 
 Select the appropriate `animals`, `people`, or `words` checkpoint from the [DIAMOND Model Weights v1.0](https://github.com/gmum/DIAMOND/releases/tag/weights-v1.0) release.
 
+Download the selected LoRA checkpoint and place it in `checkpoints/lora/`.
+
 HandsXL weights originate from the [official HandsXL repository](https://huggingface.co/xyy1551308532/Hands_XL).
 
-Full evaluation datasets (CSV files with prompts and corresponding random seeds) are provided in the `datasets/` directory.  
-For **SDXL**, a shortened dataset variant is released, as no random seeds producing artifact-containing images could be found for some prompts.
+Evaluation datasets are not distributed with the repository. Generate them locally using the provided prompt files and the instructions in **Generate Custom Evaluation Dataset** below.
 
 # DIAMOND
 
@@ -205,7 +206,7 @@ python src/generate_metrics.py \
 For computing **ImageReward**, please refer to the official repository: https://github.com/zai-org/ImageReward
 
 > [!NOTE]  
-> Prompt CSV files used for evaluation are provided in the `datasets/` directory.
+> Generate the prompt-and-seed CSV files locally using **Generate Custom Evaluation Dataset** below.
 
 
 
