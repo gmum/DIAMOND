@@ -71,9 +71,6 @@ conda activate diamond-flux2
 pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 \
   --index-url https://download.pytorch.org/whl/cu124
 
-pip uninstall diffusers -y
-pip install git+https://github.com/huggingface/diffusers.git -U
-
 pip install -r requirements2.txt
 
 ```
@@ -233,3 +230,19 @@ python src/generate_dataset.py \
 > - `generate_dataset.py` → dev/schnell 
 > - `generate_dataset_flux2.py` → flux2dev
 > - `generate_dataset_sdxl.py` → sdxl
+
+## Citation
+
+If you find this work useful, please cite:
+
+```bibtex
+@misc{polowczyk2026diamonddirectedinferenceartifact,
+  title={DIAMOND: Directed Inference for Artifact Mitigation in Flow Matching Models},
+  author={Alicja Polowczyk and Agnieszka Polowczyk and Piotr Borycki and Joanna Waczyńska and Jacek Tabor and Przemysław Spurek},
+  year={2026},
+  eprint={2602.00883},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  url={https://arxiv.org/abs/2602.00883},
+}
+```
