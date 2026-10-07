@@ -77,25 +77,29 @@ pip install git+https://github.com/huggingface/diffusers.git -U
 pip install -r requirements2.txt
 
 ```
-## 🔍 Artifact Detector Checkpoint
+## 🔍 Artifact Detector Checkpoints
 
-Download `ad_pytorch_model.bin` from the [DiffDoctor](https://github.com/ali-vilab/DiffDoctor) repository and place it at:
+Download the required detector and place it in `checkpoints/`:
 
-```text
-checkpoints/ad_pytorch_model.bin
-```
+- [DiffDoctor artifact detector (`ad_pytorch_model.bin`)](https://github.com/gmum/DIAMOND/releases/download/weights-v1.0/ad_pytorch_model.bin)
+- [RichHF baseline detector (`ad_richhf_baseline_model.bin`)](https://github.com/gmum/DIAMOND/releases/download/weights-v1.0/ad_richhf_baseline_model.bin)
+
+The artifact detector was originally released with [DiffDoctor](https://github.com/ali-vilab/DiffDoctor).
 
 ## 📦 SOTA Method Weights
 
-We release **our trained model weights** for several state-of-the-art artifact mitigation methods.
+We provide the model weights used in our evaluation of state-of-the-art artifact mitigation methods.
 
 
-| Base Model        | DiffDoctor | HPSv2 | HandsXL |
-|-----------------|------------|-------|---------|
-| FLUX.1 [dev]    | Coming Soon | Coming Soon | Coming Soon |
-| FLUX.1 [schnell]| Coming Soon | Coming Soon | — |
-| SDXL            | — | — | Coming Soon |
-| FLUX.2 [dev]   | — | — | — |
+| Base Model | DiffDoctor | HPSv2 | HandsXL |
+|---|---|---|---|
+| FLUX.1 [dev] | [Download](https://github.com/gmum/DIAMOND/releases/tag/weights-v1.0) | [Download](https://github.com/gmum/DIAMOND/releases/tag/weights-v1.0) | [Download](https://github.com/gmum/DIAMOND/releases/download/weights-v1.0/people_handv1.safetensors) |
+| FLUX.1 [schnell] | [Download](https://github.com/gmum/DIAMOND/releases/tag/weights-v1.0) | [Download](https://github.com/gmum/DIAMOND/releases/tag/weights-v1.0) | — |
+| SDXL | — | — | [Download](https://github.com/gmum/DIAMOND/releases/download/weights-v1.0/people_handv55.safetensors) |
+
+DiffDoctor and HPSv2 checkpoints are dataset-specific. Select the appropriate `animals`, `people`, or `words` checkpoint from the [DIAMOND Model Weights v1.0](https://github.com/gmum/DIAMOND/releases/tag/weights-v1.0) release.
+
+HandsXL weights originate from the [official HandsXL repository](https://huggingface.co/xyy1551308532/Hands_XL).
 
 Full evaluation datasets (CSV files with prompts and corresponding random seeds) are provided in the `datasets/` directory.  
 For **SDXL**, a shortened dataset variant is released, as no random seeds producing artifact-containing images could be found for some prompts.
