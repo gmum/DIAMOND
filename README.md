@@ -59,21 +59,20 @@ pip install -r requirements.txt
 Requires a newer version of diffusers installed directly from GitHub.
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.5.1-red)
-![TorchVision](https://img.shields.io/badge/torchvision-0.20.1-orange)
-![TorchAudio](https://img.shields.io/badge/torchaudio-2.5.1-orange)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.6.0-red)
+![TorchVision](https://img.shields.io/badge/torchvision-0.21.0-orange)
 ![Diffusers](https://img.shields.io/badge/diffusers-github-yellow)
 
 ```bash
 conda create -n diamond-flux2 python=3.11 -y
 conda activate diamond-flux2
 
-pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 \
-  --index-url https://download.pytorch.org/whl/cu124
+pip install torch==2.6.0 torchvision==0.21.0 \
+  --index-url https://download.pytorch.org/whl/cu126
 
 pip install -r requirements2.txt
-
 ```
+
 ## 🔍 Artifact Detector Checkpoints
 
 Download the required detector and place it in `checkpoints/`:
